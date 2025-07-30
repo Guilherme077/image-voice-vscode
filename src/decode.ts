@@ -17,6 +17,12 @@ export function decodeByLsb(imgUrl: string): Promise<String> {
             const binaryChars = binaryImg.match(/.{1,8}/g) || [];
             for (let i = 0; i < binaryChars.length; i++){
                 textResult += String.fromCharCode(parseInt(binaryChars[i], 2));
+                if(textResult.length >= 6){
+                    if(textResult.slice(-6) == "_!IV!_"){
+                        textResult = textResult.substring(0, textResult.length - 6);
+                        break;
+                    }
+                }
             }
 
 
