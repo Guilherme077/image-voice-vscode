@@ -9,13 +9,22 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:html"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "languages": [
       {
-        "command": "imagevoice.helloWorld",
-        "title": "Hello World"
+        "id": "html",
+        "aliases": [
+          "HTML",
+          "html"
+        ],
+        "extensions": [
+          ".html",
+          ".htm"
+        ]
       }
     ]
   },
