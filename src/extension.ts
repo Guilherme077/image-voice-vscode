@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as path from 'path';
+import { decodeByLsb } from './decode';
+import path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -16,8 +16,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 				const src = textCorresponds[1];
 
-				const suggestion = new vscode.CompletionItem(`alt="${src}"`, vscode.CompletionItemKind.Value);
-                suggestion.insertText = `alt="${src}"`;
+				const absoluteSrc = path.resolve(path.dirname(document.uri.fsPath) , src);
+
+				const altText = await decodeByLsb(absoluteSrc);
+
+				const suggestion = new vscode.CompletionItem(`alt="${altText}"`, vscode.CompletionItemKind.Value);
+                suggestion.insertText = `alt="${altText}"`;
                 suggestion.detail = 'Imagevoice suggestion';
                 suggestion.documentation = 'This is a test!';
 				
