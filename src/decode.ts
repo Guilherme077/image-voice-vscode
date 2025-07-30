@@ -8,12 +8,19 @@ export function decodeByLsb(imgUrl: string): Promise<String> {
         png.parse(fileBuffer, function (err, image) {
             if (err) return reject(err);
             let binaryImg = '';
+            let textResult = '';
 
             for (let i = 0; i < image.data.length; i++) {
-                binaryImg += image.data[i].toString(2).padStart(8, '0') + ' ';
+                binaryImg += image.data[i].toString(2).slice(-1);
             }
-            
-            resolve(binaryImg);
+
+            const binaryChars = binaryImg.match(/.{1,8}/g) || [];
+            for (let i = 0; i < binaryChars.length; i++){
+                textResult += String.fromCharCode(parseInt(binaryChars[i], 2));
+            }
+
+
+            resolve(textResult);
         });
     });
 
