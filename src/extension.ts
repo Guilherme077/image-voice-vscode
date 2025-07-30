@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 				const suggestion = new vscode.CompletionItem(`alt="${altText}"`, vscode.CompletionItemKind.Value);
                 suggestion.insertText = `alt="${altText}"`;
                 suggestion.detail = 'Imagevoice suggestion';
-                suggestion.documentation = 'This is a test!';
+                suggestion.documentation = 'This is the alternative text that the Imagevoice found encoded in this image.';
 				
 				return [suggestion];
 			}
